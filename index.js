@@ -59,7 +59,10 @@ var Config = require(config);
 console.log(Config);
 
 var AirQuality = require('airquality-mq2');
+var AudioPwm = require('audio-pwm');
+
 var airquality = new AirQuality(Config.airquality);
+var audiopwm = new AudioPwm();
 
 airquality.on('onerror', function(value) {
   console.log("onerror:");
@@ -70,6 +73,7 @@ airquality.on('onreading', function(value) {
   log("airquality: onreading: " + value);
   if (value > airquality.unhealthy) {
     log("alert: " + value + ">" + airquality.unhealthy);
+    audiopwm.start();
   }
 });
 
