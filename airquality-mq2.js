@@ -16,7 +16,7 @@
 
 //'use strict'; //TODO
 
-var Adc = require('adc');
+var adc = require('adc');
 var EventEmitter = require('events').EventEmitter;
 
 /**
@@ -38,7 +38,6 @@ function AirQuality(configuration) {
   self.contaminanttype = "AirPollution";
   self.valuetype = "Measured";
   self.unhealthy = 100; // TODO: Calibrate
-  self.adc = new Adc();
   return self;
 }
 
@@ -49,8 +48,14 @@ AirQuality.prototype.update = function update() {
   if (false)
     console.log("update" + self.contaminantvalue);
   try {
-    self.contaminantvalue++;
-    self.emit("onreading", self.contaminantvalue);
+    self.port.read(function(err, value) {
+      if (err) {
+        return self.emit("onerror", err);
+      } else {
+        self.contaminantvalue = value;
+        self.emit("onreading", self.contaminantvalue);
+      }
+    });
   } catch (e) {
     return self.emit("onerror", e);
   }
@@ -61,6 +66,7 @@ AirQuality.prototype.stop = function stop() {
   try {
     clearInterval(self.interval);
     self.interval = null;
+    self.port.close();
   } catch (e) {
     return self.emit("onerror", e);
   }
@@ -68,10 +74,15 @@ AirQuality.prototype.stop = function stop() {
 
 AirQuality.prototype.start = function start() {
   var self = this;
-  if (null === self.interval) {
-    self.interval = setInterval(function() { self.update(); },
-                                1000. / self.frequency);
-  }
+  self.port = adc.open(self.config.adc, function(err) {
+    if (err) {
+      return self.emit("onerror", self);
+    }
+    if (null === self.interval) {
+      self.interval = setInterval(function() { self.update(); },
+                                  1000. / self.frequency);
+    }
+  });
 }
 
 module.exports = AirQuality;
