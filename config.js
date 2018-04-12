@@ -21,7 +21,7 @@ module.exports = {
     adc: {device: '/dev/adc0' , pin: 0}
   },
   lorawan: {
-    method: "adp",
+    method: "abp",
     nwkskey: "2B7E151628AED2A6ABF7158809CF4F3C", //TODO: update
     appskey: "2B7E151628AED2A6ABF7158809CF4F3C", //TODO: update
     devaddr: "2BADC0DE", //TODO: update
