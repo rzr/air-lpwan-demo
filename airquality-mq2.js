@@ -29,7 +29,7 @@ function AirQuality(configuration) {
   var self = this;
   EventEmitter.call(self);
   if (null === configuration) {
-    configuration = {frequency : 1, adc : {device : '/dev/adc0', pin : 0}};
+    configuration = {frequency: 1, adc: {device: '/dev/adc0', pin: 0}};
   }
   self.config = configuration;
   self.frequency = configuration.frequency;
