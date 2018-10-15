@@ -74,7 +74,7 @@ LoraWan.prototype.send = function send(value) {
   var self = this;
   log("send: May be skipped if no bandwidth :" + self.state);
   //self.tx("mac resume");
-  self.tx("mac tx uncnf " + self.portno + " " +value); // expect: "ok", "mac_tx_ok"
+  self.tx("mac tx uncnf " + self.portno + " " + value); // expect: "ok", "mac_tx_ok"
 }
 
 LoraWan.prototype.status = function status() {
@@ -112,8 +112,9 @@ LoraWan.prototype.start = function start() {
   });
 
   self.port.on('data', function(data) {
+    data = data && data.toString();
     if (true) {
-      log('< rx: "' + data.toString() + '"');
+      log('< rx: "' + data + '"');
       // self.emit("ondata", data); ///TODO: emit upper level
     }
     if (data.indexOf("ok") >= 0) {
@@ -167,8 +168,8 @@ LoraWan.prototype.start = function start() {
       }
     }
     self.port.write(message, function(err) {
+      log('write: ' + err);
       if (err) {
-        log("error: " + err);
         return self.emit("onerror", self);
       }
       log("> tx: " + message);
