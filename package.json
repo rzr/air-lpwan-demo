@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "file:///home/philippe/var/cache/url/git/ssh/github.com/TizenTeam/TizenRT/src/TizenRT"
+    "url": "https://github.com/rzr/air-lpwan-demo"
   },
   "keywords": [
     "iotjs",
@@ -23,5 +23,8 @@
     "airquality"
   ],
   "author": "Philippe Coval <philippe.coval@osg.samsung.com>",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "serialport": "^7.0.2"
+  }
 }
