@@ -49,7 +49,7 @@ function SerialPort(device, configuration) {
       self.emit("error", err);
     } else {
       self.uart.on('data', function(data) {
-	self.emit("data", data);
+	self.emit("data", data.toString());
       });
     }
   });
