@@ -25,6 +25,11 @@ module.exports = {
     nwkskey: "2B7E151628AED2A6ABF7158809CF4F3C", //TODO: update
     appskey: "2B7E151628AED2A6ABF7158809CF4F3C", //TODO: update
     devaddr: "2BADC0DE", //TODO: update
-    serialport: { device: '/dev/ttyS1', config: { baudrate: 57600 } }
+    serialport: {
+      device: '/dev/ttyS1', // or ttyUSB* for Linux
+      config: {
+        baudRate: 57600
+      }
+    }
   }
 };
