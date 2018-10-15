@@ -26,7 +26,7 @@ module.exports = {
     appskey: "2B7E151628AED2A6ABF7158809CF4F3C", //TODO: update
     devaddr: "2BADC0DE", //TODO: update
     serialport: {
-      device: '/dev/ttyS1', // or ttyUSB* for Linux
+      device: (process.platform === 'linux') ? '/dev/ttyUSB0' : '/dev/ttyS1',
       config: {
         baudRate: 57600
       }
