@@ -40,7 +40,7 @@ function die(err, message) {
   return text;
 }
 
-var pwd = ".";
+var pwd = "";
 var runtime = "iotjs";
 if (undefined !== process.argv[0]) {
   console.log(process);
@@ -52,9 +52,9 @@ if (undefined !== process.argv[0]) {
 console.log("pwd: " + pwd);
 
 var fs = require('fs');
-var config = pwd  + '/private/config.js';
+var config = pwd  + 'private/config.js';
 if (! fs.existsSync(config))
-  config = 'config';
+  config = 'config.js';
 var Config = require(config);
 console.log(Config);
 
@@ -80,7 +80,7 @@ airquality.on('onreading', function(value) {
   }
 });
 
-if (false)  audiopwm.start();
+if (false) audiopwm.start();
 
 setTimeout(function() { lpwan.start(); }, 1 * 1000);
 setTimeout(function() { airquality.start() }, 10 * 1000);
