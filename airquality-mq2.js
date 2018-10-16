@@ -16,8 +16,9 @@
 
 //'use strict'; //TODO
 
-var adc = require('adc');
+var Adc = require('adc');
 var EventEmitter = require('events').EventEmitter;
+var adc = new Adc();
 
 /**
  * Class inspired by W3C's generic-sensor + oneiota:
@@ -31,8 +32,8 @@ function AirQuality(configuration) {
   if (null === configuration) {
     configuration = {frequency: 1, adc: {device: '/dev/adc0', pin: 0}};
   }
-  self.config = configuration;
-  self.frequency = configuration.frequency;
+  self.config = configuration || {};
+  self.frequency = configuration.frequency || 1;
   self.interval = null;
   self.contaminantvalue = 0;
   self.contaminanttype = "AirPollution";
@@ -45,8 +46,9 @@ AirQuality.prototype = Object.create(require('events').EventEmitter.prototype);
 
 AirQuality.prototype.update = function update() {
   var self = this;
-  if (false)
-    console.log("update" + self.contaminantvalue);
+  if (false) {
+    console.log("airquality: update:" + self.contaminantvalue);
+  }
   try {
     self.port.read(function(err, value) {
       if (err) {
