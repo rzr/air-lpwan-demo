@@ -43,24 +43,23 @@ function die(err, message) {
 var pwd = "";
 var runtime = "iotjs";
 if (undefined !== process.argv[0]) {
-  console.log(process);
+  console.log(JSON.stringify(process));
   runtime = process.argv[0];
-  if (undefined !== process.argv[1]) {
-    pwd = process.argv[1].substr(0, process.argv[1].lastIndexOf('/'));
-  }
 }
 console.log("pwd: " + pwd);
 
 var fs = require('fs');
-var config = pwd  + 'private/config.js';
-if (! fs.existsSync(config))
-  config = 'config.js';
-var Config = require(config);
-console.log(Config);
-
 var AirQuality = require('airquality-mq2');
 var LoraWan = require('lorawan');
 var AudioPwm = require('audio-pwm');
+
+var Config;
+try {
+  Config = require('private/config.js');
+} catch (err) {
+  Config = require('config.js');
+}
+console.log(JSON.stringify(Config));
 
 var airquality = new AirQuality(Config.airquality);
 var lpwan = new LoraWan(Config.lorawan);
@@ -80,7 +79,7 @@ airquality.on('onreading', function(value) {
   }
 });
 
-if (false) audiopwm.start();
+if (false)  audiopwm.start();
 
 setTimeout(function() { lpwan.start(); }, 1 * 1000);
 setTimeout(function() { airquality.start() }, 10 * 1000);
