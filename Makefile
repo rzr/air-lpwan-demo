@@ -20,8 +20,26 @@
 default: run
 	@echo "log: $@: $^"
 
+eslint_file?=node_modules/eslint/bin/eslint.js
+
 %/run: ./example/index.js
 	${@D} $<
 
 run: iotjs/run
+	@echo "log: $@: $^"
+
+node_modules: package.json
+	npm install
+
+${eslint_file}:
+	npm install eslint --save-dev
+
+.eslintrc.js: ${eslint_file}
+	$< --init
+
+eslint: ${eslint_file} .eslintrc.js
+	${eslint_file} --no-color --fix .
+	${eslint_file} --no-color .
+
+lint: eslint
 	@echo "log: $@: $^"
