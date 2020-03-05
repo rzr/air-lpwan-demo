@@ -1,3 +1,6 @@
+# .gitignore
+
+**/node_modules/
 **/private/
-nodes_modules/
+**/tmp
 *~
