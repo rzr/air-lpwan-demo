@@ -1,6 +1,6 @@
 {
   "name": "air-lpwan-demo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic demo created for Tizen:RT showcase",
   "main": "index.js",
   "scripts": {
