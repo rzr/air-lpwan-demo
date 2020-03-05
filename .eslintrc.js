@@ -13,5 +13,10 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
+	"no-constant-condition": "warn",
+	"no-useless-escape": "warn",
+	"no-unused-vars": "warn",
+	"no-empty": "warn",
+	"no-undef": "warn"
     }
 };
