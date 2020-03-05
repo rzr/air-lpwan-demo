@@ -26,5 +26,8 @@
   "license": "Apache-2.0",
   "dependencies": {
     "serialport": "^7.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
   }
 }
