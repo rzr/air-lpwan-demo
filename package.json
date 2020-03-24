@@ -22,7 +22,7 @@
     "sensor",
     "airquality"
   ],
-  "author": "Philippe Coval <philippe.coval@osg.samsung.com>",
+  "author": "Philippe Coval <rzr@users.sf.net>",
   "license": "Apache-2.0",
   "dependencies": {
     "serialport": "^8.0.7"
